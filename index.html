@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이더리움 경매 DApp</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #0056b3; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-right: 10px; }
+        button:hover { background-color: #0056b3; }
+        input[type="text"], input[type="number"] { padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-right: 10px; }
+        .status-box { background-color: #e9ecef; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .status-box p { margin: 5px 0; }
+        .error-message { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>이더리움 경매 DApp</h1>
+
+        <div class="status-box">
+            <h2>지갑 연결 상태</h2>
+            <p id="accountAddress">계정 주소: 연결 안됨</p>
+            <p id="networkStatus">네트워크: 연결 안됨</p>
+            <button id="connectWalletBtn">지갑 연결</button>
+            <p>계정 선택:
+                <select id="accountSelector"></select>
+            </p>
+            <p id="connectError" class="error-message"></p>
+        </div>
+
+        <div class="status-box">
+            <h2>경매 현재 상태</h2>
+            <p>경매 진행 중: <span id="auctionActive"></span></p>
+            <p>최고 입찰 금액: <span id="highestBid"></span> ETH</p>
+            <p>최고 입찰자 이름: <span id="highestBidderName"></span></p>
+            <p>최고 입찰자 주소: <span id="highestBidderAddress"></span></p>
+            <p>컨트랙트 소유자: <span id="contractOwner"></span></p>
+            <button id="refreshStatusBtn">상태 새로고침</button>
+            <p id="auctionStatusError" class="error-message"></p> </div>
+
+        <h2>입찰하기</h2>
+        <input type="text" id="bidderNameInput" placeholder="이름 입력" value="테스터">
+        <input type="number" id="bidAmountInput" placeholder="입찰 금액 (ETH)" step="0.001" value="0.001">
+        <button id="placeBidBtn">입찰하기</button>
+        <p id="bidMessage" class="error-message"></p>
+
+        <h2>경매 종료</h2>
+        <p>경매 소유자만 종료할 수 있습니다.</p>
+        <button id="endAuctionBtn">경매 종료</button>
+        <p id="endAuctionMessage" class="error-message"></p>
+
+        <h2>낙찰자 정보</h2>
+        <p>낙찰자 이름: <span id="winnerName"></span></p>
+        <p>낙찰 금액: <span id="winnerAmount"></span> ETH</p>
+        <p>낙찰자 주소: <span id="winnerAddress"></span></p>
+        <button id="getWinnerBtn">낙찰자 정보 확인</button>
+        <p id="winnerMessage" class="error-message"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@4.8.0/dist/web3.min.js"></script>
+    <script src="keys.js"></script>
+    <script src="web3-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
